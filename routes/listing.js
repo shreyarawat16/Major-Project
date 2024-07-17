@@ -58,10 +58,8 @@ const newlisting= new Listing(req.body.listing);
 
 
 //EDIT ROUTE
-router.get("/:id/edit", validateListing, wrapAsync( async (req, res)=>{
-    if(!req.body.listing){
-        throw new ExpressErr(400, "Send valid data for listing");
-       }
+router.get("/:id/edit", wrapAsync( async (req, res)=>{
+    
     let {id}= req.params;
     const listing = await Listing.findById(id);
     res.render("./listings/edit.ejs", {listing});
@@ -69,6 +67,9 @@ router.get("/:id/edit", validateListing, wrapAsync( async (req, res)=>{
 
 //UPDATE ROUTE
 router.put("/:id", validateListing, wrapAsync(async (req, res)=>{
+    if(!req.body.listing){
+        throw new ExpressErr(400, "Send valid data for listing");
+       }
     let {id}= req.params;
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect("/listings");
