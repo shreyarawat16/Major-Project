@@ -46,4 +46,46 @@ router.get("/:id/edit", isLoggedIn,isOwner,  wrapAsync( listingController.editLi
         throw new ExpressErr(400, "Location is missing");
     }
 */
+
+const newlisting= new Listing(req.body.listing);
+
+   await newlisting.save();
+   res.redirect("/listings");
+  
+}));
+
+
+//EDIT ROUTE
+router.get("/:id/edit", validateListing, wrapAsync( async (req, res)=>{
+    if(!req.body.listing){
+        throw new ExpressErr(400, "Send valid data for listing");
+       }
+    let {id}= req.params;
+    const listing = await Listing.findById(id);
+    res.render("./listings/edit.ejs", {listing});
+}));
+
+//UPDATE ROUTE
+router.put("/:id", validateListing, wrapAsync(async (req, res)=>{
+    let {id}= req.params;
+    await Listing.findByIdAndUpdate(id, {...req.body.listing});
+    res.redirect("/listings");
+}));
+
+
+//DELETE ROUTE
+router.delete("/:id", wrapAsync(async (req, res)=>{
+    let {id}= req.params;
+   let deleted= await Listing.findByIdAndDelete(id);
+   console.log(deleted);
+    res.redirect("/listings");
+}));
+
+
+//SHOW ROUTE
+router.get("/:id" , wrapAsync(async (req, res)=>{
+   let {id}= req.params;
+   const listing = await Listing.findById(id).populate("reviews");
+   res.render("./listings/show.ejs", { listing });
+}));
 module.exports= router;
