@@ -1,3 +1,4 @@
+/*
 mapboxgl.accessToken = mapToken;
 console.log(mapToken);
     const map = new mapboxgl.Map({
@@ -17,3 +18,4 @@ console.log(mapToken);
     <p>Exact location will be provided after booking! </p>`)
 )
  .addTo(map);
+ */
