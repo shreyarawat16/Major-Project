@@ -28,6 +28,19 @@ module.exports.validateListing = (req, res, next)=>{
         next();
     }
 }
+
+module.exports.validateEditListing = (req, res, next)=>{
+
+    let {error}= listingSchema.validate(req.body.listing);
+  
+    if(error){
+        let errmsg= error.details.map( (el)=> el.message ).join(",");
+        throw new ExpressErr(400, errmsg);
+    }
+    else{
+        next();
+    }
+}
 module.exports.validateReview = (req, res, next)=>{
     let {error}= reviewSchema.validate(req.body);
   
@@ -60,7 +73,7 @@ module.exports.validateReview = (req, res, next)=>{
  module.exports.isReviewAuthor = async(req, res, next)=>{
     let {id, rid}= req.params;
     let review = await Review.findById(rid);
-    if( !review.author.equals(res.locals.currUser._rid)){
+    if( !review.author.equals(res.locals.currUser._id)){
         req.flash("error", "you are not the author of this review");
         return res.redirect(`/listings/${id}`);
     }

@@ -10,10 +10,8 @@ const listingSchema= new Schema({
         type: String,
     },
     image:{
-        type: String,
-        default: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-        set: (v) => v=== "" ? "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v,
-
+       url: String,
+       filename: String,
     },
     price:{
         type: Number,
@@ -33,8 +31,21 @@ const listingSchema= new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-
-
+    geometry:{
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+    },
+    coordinates:{
+        type: [Number],
+        reuired: true,
+    },
+},
+    // category:{
+    //     type: String,
+    //     enum: ["mountains", "farms", "trending","beach", "rooms", "castles"]
+    // }
 });
 //Mongoose middleware
 listingSchema.post("findOneAndDelete", async(listing)=>{

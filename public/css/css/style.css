@@ -121,3 +121,32 @@ margin-right: 1.5rem;
     padding-left: 0;
     padding-right: 0;
 }
+
+/*MAP */
+#map { 
+    height: 400px;
+    width: 100vh;
+}
+
+#filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter{
+    text-align: center;
+    margin-right: 1.5rem;
+    margin-top: 1.5rem;
+    opacity: 0.7;
+    transition: all 1ms;
+  }
+.filter:hover{
+  opacity: 1;
+  cursor: pointer,
+}
+.filter:p{
+    font-size: 1 rem;
+}
+.tax-info{
+    display: none;
+}
