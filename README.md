@@ -16,7 +16,7 @@ Show page: This page shows details of a particular listing from here you can edi
 Edit Page: This page allows the user to edit the information related to a particular listing.
 
 # Authorization
-is taken into account while giving rights to a user to edit or delete a listing.Only the user who had made a particular listing can delete or edit that artwork.
+is taken into account while giving rights to a user to edit or delete a listing.Only the user who had made a particular listing can delete or edit that listing.
 
 # Authentication
-is also taken into account while adding comments( a user can only add comments if he/she is logged in).
+is also taken into account while adding reviews( a user can only add reviews if he/she is logged in).
